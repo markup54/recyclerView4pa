@@ -5,6 +5,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import java.util.ArrayList;
 
@@ -12,6 +15,9 @@ public class MainActivityRecyclerView extends AppCompatActivity {
     ArrayList<Produkt> produkty = new ArrayList<>();
     RecyclerView recyclerView;
     ZakupyAdapter adapter;
+    EditText editText;
+    Button buttonDodaj;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,5 +36,17 @@ public class MainActivityRecyclerView extends AppCompatActivity {
         adapter = new ZakupyAdapter(this,produkty);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        buttonDodaj = findViewById(R.id.button2);
+        editText = findViewById(R.id.editTextTextPersonName2);
+        buttonDodaj.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String nazwaProduktu  = editText.getText().toString();
+                        Produkt produkt = new Produkt(nazwaProduktu,23,"jakaś");
+                        adapter.dodajProdukt(produkt);
+                    }
+                }
+        );
     }
 }

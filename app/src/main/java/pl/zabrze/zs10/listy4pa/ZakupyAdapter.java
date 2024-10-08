@@ -2,10 +2,12 @@ package pl.zabrze.zs10.listy4pa;
 
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +23,11 @@ public class ZakupyAdapter extends RecyclerView.Adapter<ZakupyAdapter.ProduktVie
         this.listaZakupow = listaZakupow;
     }
 
+    public void dodajProdukt(Produkt produkt){
+        listaZakupow.add(produkt);
+        notifyItemInserted(listaZakupow.size()-1);
+    }
+
     @NonNull
     @Override
     public ProduktViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -34,6 +41,23 @@ public class ZakupyAdapter extends RecyclerView.Adapter<ZakupyAdapter.ProduktVie
     public void onBindViewHolder(@NonNull ProduktViewHolder holder, int position) {
         //wypełnienie widoku danymi
         holder.checkBox.setText(listaZakupow.get(position).getNazwa());
+        holder.checkBox.setOnCheckedChangeListener(
+                new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                        if(b){
+                            holder.checkBox.setPaintFlags(
+                                    holder.checkBox.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG
+                            );
+                        }
+                        else{
+                            holder.checkBox.setPaintFlags(
+                                    holder.checkBox.getPaintFlags() &~ Paint.STRIKE_THRU_TEXT_FLAG
+                            );
+                        }
+                    }
+                }
+        );
     }
 
     @Override
