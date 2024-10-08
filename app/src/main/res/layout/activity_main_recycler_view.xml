@@ -9,11 +9,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/editTextTextPersonName2">
+        app:layout_constraintBottom_toTopOf="@id/button2">
 
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -24,6 +24,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="Dodaj produkt"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button2"
         app:layout_constraintStart_toStartOf="parent" />
