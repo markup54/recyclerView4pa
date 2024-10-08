@@ -28,6 +28,11 @@ public class ZakupyAdapter extends RecyclerView.Adapter<ZakupyAdapter.ProduktVie
         notifyItemInserted(listaZakupow.size()-1);
     }
 
+    public void usunProdukty(){
+        listaZakupow.removeIf(produkt -> produkt.isZaznaczony());
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public ProduktViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -41,23 +46,29 @@ public class ZakupyAdapter extends RecyclerView.Adapter<ZakupyAdapter.ProduktVie
     public void onBindViewHolder(@NonNull ProduktViewHolder holder, int position) {
         //wypełnienie widoku danymi
         holder.checkBox.setText(listaZakupow.get(position).getNazwa());
+
+        int indeks = position;
         holder.checkBox.setOnCheckedChangeListener(
                 new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                         if(b){
+                            listaZakupow.get(indeks).setZaznaczony(true);
                             holder.checkBox.setPaintFlags(
                                     holder.checkBox.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG
                             );
                         }
                         else{
+                            listaZakupow.get(indeks).setZaznaczony(false);
                             holder.checkBox.setPaintFlags(
                                     holder.checkBox.getPaintFlags() &~ Paint.STRIKE_THRU_TEXT_FLAG
                             );
                         }
                     }
                 }
+
         );
+        holder.checkBox.setChecked(listaZakupow.get(position).isZaznaczony());
     }
 
     @Override

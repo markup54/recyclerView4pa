@@ -17,6 +17,7 @@ public class MainActivityRecyclerView extends AppCompatActivity {
     ZakupyAdapter adapter;
     EditText editText;
     Button buttonDodaj;
+    Button buttonUsun;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class MainActivityRecyclerView extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         buttonDodaj = findViewById(R.id.button2);
+        buttonUsun = findViewById(R.id.button3);
         editText = findViewById(R.id.editTextTextPersonName2);
         buttonDodaj.setOnClickListener(
                 new View.OnClickListener() {
@@ -45,6 +47,14 @@ public class MainActivityRecyclerView extends AppCompatActivity {
                         String nazwaProduktu  = editText.getText().toString();
                         Produkt produkt = new Produkt(nazwaProduktu,23,"jakaś");
                         adapter.dodajProdukt(produkt);
+                    }
+                }
+        );
+        buttonUsun.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        adapter.usunProdukty();
                     }
                 }
         );
